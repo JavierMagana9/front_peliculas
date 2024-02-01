@@ -4,13 +4,9 @@
   <h2>Mis Peliculas</h2>
 
     <%= respuesta.error %>
-
-  <input
-    type="button"
-    value="Crear Pelicula"
-    id="crearPelicula"
-    name="crearPelicula"
-  />
+<form action="/crearpeli" method="get">
+  <button type="submit">Crear Pelicula</button>
+</form>
   <section>
     <div class="flex-container">
     <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
