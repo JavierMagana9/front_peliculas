@@ -1,0 +1,36 @@
+<%- include('template/header') %>
+<main>
+  <h1>C-ADMIN</h1>
+  <h2>Mis Peliculas</h2>
+
+    <%= respuesta.error %>
+
+  <input
+    type="button"
+    value="Crear Pelicula"
+    id="crearPelicula"
+    name="crearPelicula"
+  />
+  <section>
+    <div class="flex-container">
+    <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
+
+    <article>
+      <div>
+        <img src="" alt="" />
+      </div>
+      <div>
+        <h3><%= element.titulo %></h3>
+        <p><%= element.director %></p>
+      </div>
+      <div class="botones">
+        <button>Editar</button>
+        <button>Eliminar</button>
+      </div>
+    </article>
+
+    <% }) %> <% } %>
+    </div>
+  </section>
+</main>
+<%- include('template/footer') %>
