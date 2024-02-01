@@ -23,7 +23,8 @@ const consulta = async (url, method = "GET", body = {}) => {
 
     return respuesta;
   } catch (error) {
-    
+    console.log(error)
+
   }
 };
 

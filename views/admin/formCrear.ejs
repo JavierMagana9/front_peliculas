@@ -1,3 +1,36 @@
+<%- include('template/header') %>
+
 <main>
-    
+
+    <!-- "titulo": "mario bros",
+    "anio": 2023,
+    "director": "aaron horvath",
+    "genero": "animacion",
+    "duracion": 92,
+    "imagen": "https://randomuser.me/api/portraits/thumb/men/45.jpg" -->
+
+  <h1>Crear una pelicula</h1>
+  <form action="/crearpeli" method="post">
+    <label for="titulo">Título</label>
+    <input type="text" id="titulo" name="titulo" />
+
+    <label for="anio">Año</label>
+    <input type="text" name="anio" id="anio">
+
+    <label for="director">Director</label>
+    <input type="text" name="director" id="director" />
+
+    <label for="genero">Género</label>
+    <input type="text" name="genero" id="genero" />
+
+    <label for="duracion">Duración</label>
+    <input type="text" name="duracion" id="duracion" />
+
+    <label for="imagen">Imagen</label>
+    <input type="text" name="imagen" id="imagen">
+
+    <button type="submit">Crear</button>
+  </form>
+
 </main>
+<%- include('template/footer') %>
