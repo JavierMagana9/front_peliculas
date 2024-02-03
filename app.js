@@ -19,7 +19,7 @@ app.set('views', __dirname + '/views')
 app.use(cors())
 app.use(cookieParser())
 
-app.use('/', require('./routers/adminRouter'))
+app.use('/admin', require('./routers/adminRouter'))
 
 app.use((req, res)=>{
     res.status(404).send('404')

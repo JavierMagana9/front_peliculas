@@ -1,31 +1,30 @@
 <%- include('template/header') %>
-<main>
-  <h1>C-ADMIN</h1>
-  <h2>Mis Peliculas</h2>
-
-    <%= respuesta.error %>
-<form action="/crearpeli" method="get">
-  <button type="submit">Crear Pelicula</button>
-</form>
+<main class="container">
+  <header class="header-main">
+    <h1>C-ADMIN</h1>
+    <h2>Mis Peliculas</h2>
+  </header>
   <section>
+    <a href="/admin/crear" class="btn">Crear Pelicula</a>
+
     <div class="flex-container">
-    <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
+      <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
 
-    <article>
-      <div>
-        <img src="" alt="" />
-      </div>
-      <div>
-        <h3><%= element.titulo %></h3>
-        <p><%= element.director %></p>
-      </div>
-      <div class="botones">
-        <button>Editar</button>
-        <button>Eliminar</button>
-      </div>
-    </article>
+      <article>
+        <div>
+          <img src="" alt="foto pelicula" />
+        </div>
+        <div>
+          <h3><%= element.titulo %></h3>
+          <p><%= element.director %></p>
+        </div>
+        <div class="botones flex-container">
+          <a href="/admin/modificar/<%= element.id_pelicula %>" class="btn">Editar</a>
+          <a href="/admin/eliminar/<%= element.id_pelicula %>" class="btn">Eliminar</a>
+        </div>
+      </article>
 
-    <% }) %> <% } %>
+      <% }) %> <% } %>
     </div>
   </section>
 </main>
