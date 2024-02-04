@@ -1,6 +1,8 @@
 <%- include('template/header') %>
 <main class="container">
-  <form action="/admin/modificar" method="POST" class="formulario">
+  <form action="/admin/modificar/<% if (!id) { %>
+   <%= id %>
+  <% } %>" method="POST" class="formulario">
     <input type="text" id="id" name="id" value="<%=id_pelicula%>" />
 
     <label for="titulo">Título</label>
@@ -21,9 +23,9 @@
     <label for="imagen">Imagen</label>
     <input type="text" name="imagen" id="imagen" value="<%=imagen%>" />
 
-
     
-    <button type="submit">Crear</button>
+    
+    <button type="submit">Modificar</button>
   </form>
 </main>
 

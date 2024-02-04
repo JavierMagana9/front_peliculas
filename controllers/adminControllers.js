@@ -1,7 +1,16 @@
 //traer el modelo
 const { consulta } = require("../utils/consulta");
 
-
+/**
+ * Controlador de ruta asíncrono que obtiene una lista de películas desde la API
+ * y renderiza la vista del panel de administración con dicha lista.
+ * 
+ * @async
+ * @function getPelis
+ * @param {Request} req - El objeto de solicitud de Express.
+ * @param {Response} res - El objeto de respuesta de Express.
+ * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ */
 const getPelis = async (req, res) => {
   let respuesta = await consulta(`${process.env.URL_BASE}/search`);
   //let respuesta = await fetch(`${process.env.URL_BASE}/search`);
@@ -11,22 +20,32 @@ const getPelis = async (req, res) => {
     respuesta,
   });
 };
+
+
+/**
+ * Manejador de ruta GET para mostrar el formulario de creación de películas.
+ * Renderiza la plantilla de formulario de creación.
+ *
+ * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP.
+ * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
+ */
 // GET CREAR PELI
-const getCrearPelis = async (req, res) => {
+const getCrearPelis = (req, res) => {
   res.render("admin/formCrear",{
     respuesta:null
   });
 };
+
 // POST CREAR PELI
 const postCrearPelis = async (req, res) => {
   const url = `${process.env.URL_BASE}/createMovie`;
   const body = req.body;
-  const file =req.file;
+  //const file =req.file;
   console.log("body crearPelis", body);
-  console.log("file crearPelis", file);
+  //console.log("file crearPelis", file);
 
   const respuesta = await consulta(url, "POST", body);
-console.log('rep',respuesta)
+console.log('respuesta postCrear',respuesta)
   
     res.render("admin/formCrear",{
        respuesta
@@ -40,12 +59,12 @@ const getModificarPeli = async(req, res)=>{
     const id = req.params.id
     let url= `${process.env.URL_BASE}/search/peli/${id}`;
     const respuesta=await consulta(url)
-    // console.log(respuesta)
+   console.log("get modificar",respuesta)
 
     res.render('admin/formModificar',{
       error:respuesta.error,
-      ...respuesta.respuesta[0]
-    
+      ...respuesta.respuesta[0],
+      id: null
     })
 
 } 
@@ -53,34 +72,48 @@ const getModificarPeli = async(req, res)=>{
 
 const modificarPeli = async(req, res)=>{
   const body=req.body
-  
+  const idParam = req.params.id
   const id=body.id
-  console.log(id)
+  console.log("ID",id)
   const url = `${process.env.URL_BASE}/editMovie/${id}`;
 
-  
    const respuesta = await consulta(url, "PUT", body);
     console.log("modificar",respuesta)
-  console.log("ID en modificar", respuesta.id)
+  console.log("ID param despues de respuesta", idParam)
+  console.log("ID despues de respuesta",id)
     if(respuesta.error){
-    //   res.render('admin/formModificar',{
-    //     error:respuesta.error,
-    //   ...respuesta.respuesta[0]
-    //   })
-    res.render('/admin/formModificar', {
-      respuesta
-    })
+      // return res.render('admin/formModificar',{
+      //   error:respuesta.error,
+      // ...respuesta.respuesta[0]
+      // })
+    // console.log("respuesta modificarPelis",respuesta)
+    //  return res.render('/admin/formModificar', {
+    //   respuesta,
+    //   id
+    // })
     }
   res.redirect('/admin')
 }
 
 //GET ELIMINAR 
 const vistaEliminar=(req,res)=>{
-    res.render('admin/eliminar')
+    res.render('admin/eliminar',{
+      id:null
+    })
+    
 }
 
 //POST ELIMINAR
+const eliminarDefinitivo = async(req,res) => {
+  const body=req.body
+  const id=body.id
+console.log("bodyid en eliminar",id)
+  // const url = `${process.env.URL_BASE}/removeMovie/${id}`;
 
+  // const respuesta = await consulta(url, "DELETE", body);
+
+
+}
 
 module.exports = {
   getPelis,
@@ -88,5 +121,6 @@ module.exports = {
   postCrearPelis,
   getModificarPeli,
   vistaEliminar,
-  modificarPeli
+  modificarPeli,
+  eliminarDefinitivo
 };
