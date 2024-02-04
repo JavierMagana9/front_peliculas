@@ -1,0 +1,37 @@
+<%- include('template/header') %>
+
+<header class="header-main">
+    <h1>USUARIO ESTO ES VER MAS</h1>
+    <h2>PELICULA</h2>
+  </header>
+  <a href="/user/search" class="btn">Regresa a la busqueda</a>
+  <section>
+    <div class="flex-container">
+    <% respuesta.forEach(element => { %>
+     
+        <article>
+            <div>
+              <img src="" alt="foto pelicula" />
+            </div>
+            <div>
+              <p>Titulo:</p>
+              <h3><%= element.titulo %></h3>
+              <p>Año:</p>
+              <p><%= element.anio %></p>
+              <p>Director:</p>
+              <p><%= element.director %></p>
+              <p>Genero:</p>
+              <p><%= element.genero %></p>
+              <p>Duración:</p>
+              <p><%= element.duracion %></p>
+              
+            </div>
+          </article>
+
+
+    <% }) %>
+  </div>
+  </section>
+
+
+<%- include('template/footer') %>

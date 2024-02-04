@@ -20,7 +20,7 @@ a{
     background-color: rgb(62, 62, 62);
     color: white;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 .btn{
     border: 1px solid black;

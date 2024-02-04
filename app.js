@@ -20,6 +20,7 @@ app.use(cors())
 app.use(cookieParser())
 
 app.use('/admin', require('./routers/adminRouter'))
+app.use('/user', require('./routers/userRouter'))
 
 app.use((req, res)=>{
     res.status(404).send('404')
