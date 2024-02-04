@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {getPelis,getCrearPelis,postCrearPelis, getModificarPeli,vistaEliminar, modificarPeli} = require('../controllers/adminControllers')
+const {getPelis,getCrearPelis,postCrearPelis, getModificarPeli,vistaEliminar, modificarPeli, eliminarDefinitivo} = require('../controllers/adminControllers')
 
 //dashboard getPelis  "/",
 
@@ -19,6 +19,6 @@ router.post('/crear', postCrearPelis)
 router.post('/modificar', modificarPeli)
 // vistaEliminar
 router.get('/eliminar/:id',vistaEliminar)
-//eliminar "/eliminar/:id" 
-
+//eliminar definitivamente "/eliminar/:id" 
+router.post('/eliminardef/:id', eliminarDefinitivo)
 module.exports = router
