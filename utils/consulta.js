@@ -1,4 +1,5 @@
 /**
+ * Funcion para utilizar fetch de una manera mas limpia en los controladores.
  * Realiza una solicitud HTTP a la URL proporcionada utilizando el método especificado.
  * Si el método es POST o PUT, incluirá el cuerpo de la solicitud en formato JSON.
  * En caso de error en la solicitud, atrapará el error y lo devolverá.

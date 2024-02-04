@@ -1,10 +1,30 @@
 const { consulta } = require("../utils/consulta");
 
+/**
+ * Controlador de ruta para renderizar la vista principal del usuario.
+ * Muestra la página de inicio para el área de usuario.
+ *
+ * @function getIndexUser
+ * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP.
+ * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
+ * @returns {void} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ */
+
 const getIndexUser = async (req, res) => {
     res.render("user/indexUser")
 }
 
-
+/**
+ * Controlador de ruta asincrono para obtener una lista de películas.
+ * Realiza una solicitud a nuestra API y luego renderiza la vista 'buscarPeli'
+ * en el área de usuario con los resultados obtenidos.
+ *
+ * @async
+ * @function getPeliculas
+ * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP.
+ * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
+ * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ */
 const getPeliculas = async (req, res) => {
 
     let respuesta = await consulta(`${process.env.URL_BASE}/search`);
@@ -14,6 +34,20 @@ const getPeliculas = async (req, res) => {
     })
 
 }
+
+/**
+ * Controlador de ruta asincrono para obtener detalles de una película especifica.
+ * Utiliza el ID de la película proporcionado en los parámetros de la ruta para hacer una solicitud
+ * a nuestra API y obtener la información detallada de la película. Luego, renderiza la vista 'verMasId'
+ * en el área de usuario con los detalles obtenidos.
+ *
+ * @async
+ * @function verMasId
+ * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP,
+ * como el ID de la película en req.params.id.
+ * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
+ * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ */
 
 const verMasId = async (req,res)=>{
 
@@ -26,10 +60,18 @@ const verMasId = async (req,res)=>{
     res.render("user/verMasId", respuesta)
 }
 
-
-
-
-
+/**
+ * Controlador de ruta POST para buscar películas por título.
+ * Extrae el título de la película del cuerpo de la solicitud, realiza una solicitud GET a nuestra API para
+ * buscar películas por ese título, y luego renderiza la vista 'verMasTitulo' con los resultados obtenidos.
+ *
+ * @async
+ * @function postPeliTitulo
+ * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP,
+ * incluyendo el título de la película en req.body.titulo.
+ * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
+ * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ */
 
 const postPeliTitulo = async(req,res) =>{
 
@@ -50,7 +92,15 @@ const postPeliTitulo = async(req,res) =>{
 }
 
 
-
+/**
+ * Controlador de ruta para renderizar la página de favoritos del usuario.
+ * Muestra la vista 'favoritos' dentro del área de usuario.
+ *
+ * @function getFavoritos
+ * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP.
+ * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
+ * @returns {void} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ */
 
 const getFavoritos = (req, res) => {
     res.render("user/favoritos")
