@@ -19,6 +19,8 @@ app.set('views', __dirname + '/views')
 app.use(cors())
 app.use(cookieParser())
 
+
+app.use('/',require('./routers/authRouter'))
 app.use('/admin', require('./routers/adminRouter'))
 app.use('/user', require('./routers/userRouter'))
 
