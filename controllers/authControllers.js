@@ -23,7 +23,7 @@ const getLogin = (req, res) => {
 
 
 const getRegistro = (req, res) => {
-    res.render('registro', { error: null})
+    res.render('registro', { error: null })
 }
 
 
@@ -65,17 +65,17 @@ const registrarUsuario = async (req, res) => {
                 let errorMessage = error.message;
                 //let errorCampo="todos los campos son obligatorios"
 
-               // res.render('registro',{errorCampo})
+                // res.render('registro',{errorCampo})
                 console.log("Mensaje error===>", errorMessage, errorCode);
             });
 
 
-       
+
     } catch (e) {
         console.log(e)
         //res.redirect('registrar');
     }
-   
+
 }
 
 
@@ -85,34 +85,34 @@ const registrarUsuario = async (req, res) => {
 const loguearUsuario = async (req, res) => {
     try {
 
-      
+
         const { email, password } = req.body;
 
         console.log("email", email);
         console.log("pass", password);
 
         firebase.auth().signInWithEmailAndPassword(email, password)
-             .then((userCredential) => {
-                 // Signed in
-                 let user = userCredential.user;
-            //     console.log("user", user);
-            //     console.log("token", user.refreshToken)
-            res.redirect("/user")
-            //    res.send("Accedio rol Usuario");//ESTO TIENE QUE SER UN RES.REDIRECT
-            //     // ...
-            //     //  const token=firebase.auth().createCustomToken(email)
-            //     //  console.log("token por lado del cliente",token)
-                
-             })
+            .then((userCredential) => {
+                // Signed in
+                let user = userCredential.user;
+                //     console.log("user", user);
+                //     console.log("token", user.refreshToken)
+                res.redirect("/user")
+                //    res.send("Accedio rol Usuario");//ESTO TIENE QUE SER UN RES.REDIRECT
+                //     // ...
+                //     //  const token=firebase.auth().createCustomToken(email)
+                //     //  console.log("token por lado del cliente",token)
+
+            })
             .catch((error) => {
-                console.log("error en login",error)
+                console.log("error en login", error)
                 let errorMessage = "usuario o contraseña no valido";
                 // console.log("error", errormessage);
                 res.render('login', { errorMessage })
             });
-            
-            // const token=firebase.auth().createCustomToken(email)
-            // console.log("token por lado del cliente",token)
+
+        // const token=firebase.auth().createCustomToken(email)
+        // console.log("token por lado del cliente",token)
 
     } catch (e) {
         console.log(e)
@@ -120,22 +120,78 @@ const loguearUsuario = async (req, res) => {
 }
 
 
-const logoutUsuario =(req,res)=>{
+const logoutUsuario = (req, res) => {
+     const body = res
+    console.log("esta es la respuesta del logout",body)
+    firebase.auth().signOut().then(() => {
+            console.log("=========el usuario cerro sesion")
+            res.redirect("/")
+        })
+        .catch((error) => {
+                    console.log("logout==========", error)
+                })
+}
 
-    firebase.auth().signOut(firestore.auth()).then(()=>{
-console.log("salio")
+const authGoogle = (req,res)=>{
+const resp=res
+
+console.log("respuesta google",resp)
+
+    const provider = new firebase.auth.GoogleAuthProvider()
+
+
+    firebase.auth().signInWithPopup(provider).then((respuesta)=>{
+console.log("se proceso con google",respuesta)
     }).catch((error)=>{
-        console.log(error)
+console.log("Hubo un erro en la Auth con google",error)
     })
+
+    
+    // firebase.auth().signInWithRedirect(provider).then((respuesta)=>{
+    //     console.log("se proceso con google",respuesta)
+    //         }).catch((error)=>{
+    //     console.log("Hubo un erro en la Auth con google",error)
+    //         })
 
 }
 
+const getRecuperarPass = (req,res)=>{
+    res.render("recuPass", {
+        error:null
+    })
+}
 
+const postRecuperarPass = (req,res)=>{
+    const email=req.body.email
+    console.log("recibo en pass",email)
+
+    const auth=firebase.auth();
+
+      const configuracion = {
+        url: "http://localhost:3000/"
+      };
+
+      auth.sendPasswordResetEmail(email, configuracion)
+        .then(result => {
+          console.log(result);
+          res.redirect("/")
+        })
+        .catch(error => {
+          console.log(error);
+          res.render("recuPass",{error:error})
+        });
+
+}
 
 
 
 module.exports = {
     registrarUsuario,
-    getLogin, getRegistro, loguearUsuario
+    getLogin, getRegistro, loguearUsuario, logoutUsuario,authGoogle,getRecuperarPass,postRecuperarPass
 }
 
+
+    
+      
+
+  

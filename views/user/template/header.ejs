@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <title>Document</title>
+
   </head>
   <body>
     <nav class="header">
@@ -22,9 +23,8 @@
         <a href="/user/search" class="btn botones">Buscar Pelicula</a>
         <a href="/user/movies" class="btn botones">Mis Favoritos</a>
       </ul>
-      <form action="/" method="GET">
-        <input type="submit" value="Logout" class="form-control btn btn-dark" />
-      </form>
+       <form action="/logout" method="post">
+            <input type="submit" name="logout" id="logout" value="Logout" class="">
+        </form>
     </nav>
-  </body>
-</html>
+  
