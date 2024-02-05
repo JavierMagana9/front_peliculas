@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const {getIndexUser,getPeliculas,getFavoritos,postPeliTitulo,verMasId} = require('../controllers/userControllers')
-
+const {jwtValidar} =require('../middleware/jwtValidar')
 /**
  * Ruta GET para la página principal del área de usuario.
  * Muestra opciones como buscar películas y ver películas favoritas.
