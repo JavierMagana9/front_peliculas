@@ -65,6 +65,6 @@ router.get('/eliminar/:id',vistaEliminar)
  * @name eliminarDefinitivo
  * @path {POST} /eliminardef/:id
  */
-router.post('/eliminardef/:id', eliminarDefinitivo)
+router.post('/eliminar/:id', eliminarDefinitivo)
 
 module.exports = router

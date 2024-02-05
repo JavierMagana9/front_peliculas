@@ -63,8 +63,8 @@ const postCrearPelis = async (req, res) => {
   res.render("admin/formCrear", {
     respuesta,
   });
-
-  // res.redirect('/admin/crear')
+  
+  // res.redirect('/admin')
 };
 
 /**
@@ -125,19 +125,31 @@ const modificarPeli = async (req, res) => {
 
 //GET ELIMINAR
 const vistaEliminar = (req, res) => {
-  res.render("admin/eliminar", {
-    id: null,
-  });
+  const id = req.params.id;
+  
+  console.log("en el get recogido del params", id);
+  res.render("admin/eliminar", {id:id});
 };
 
 //POST ELIMINAR
 const eliminarDefinitivo = async (req, res) => {
-  const body = req.body;
-  const id = body.id;
-  console.log("bodyid en eliminar", id);
-  // const url = `${process.env.URL_BASE}/removeMovie/${id}`;
+try {
+  const id = req.params.id;
+  
+  console.log("recogido del params", id);
+  const url = `${process.env.URL_BASE}/removeMovie/${id}`;
+  console.log("dentro de params el url",url)
+  let respuesta = await fetch(url, {method:'DELETE'});
+  respuesta = await respuesta.json()
+  res.redirect("/admin");
+  // console.log("dentro de params el url",url)
+  // console.log(respuesta)
 
-  // const respuesta = await consulta(url, "DELETE", body);
+} catch (error) {
+  console.log(error)
+
+}
+
 };
 
 module.exports = {
