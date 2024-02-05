@@ -1,14 +1,13 @@
 <%- include('template/header') %>
-
-<header class="header-main">
-    <h1>USUARIO</h1>
-    <h2>BUSCAR PELICULAS</h2>
+<main class="container">
+  <header class="header-main">
+    <h1 class="title">BUSCAR PELICULAS</h1>
   </header>
 
   <section>
     <form action="/user/search" method="post">
-      <input type="text" id="titulo" name="titulo"/>
-        <input type="submit" value="Busqueda por Titulo" id="peli Titulo">
+      <input type="text" id="titulo" name="titulo" />
+      <input type="submit" value="Busqueda por Titulo" id="peli Titulo" />
     </form>
     <div class="flex-container">
       <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
@@ -22,13 +21,14 @@
           <p><%= element.director %></p>
         </div>
         <div class="botones flex-container">
-          <a href="/user/search/<%= element.id_pelicula %>" class="btn">Ver Mas</a>
+          <a href="/user/search/<%= element.id_pelicula %>" class="btn"
+            >Ver Mas</a
+          >
         </div>
       </article>
 
       <% }) %> <% } %>
     </div>
-
   </section>
-
+</main>
 <%- include('template/footer') %>
