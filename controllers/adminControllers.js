@@ -1,6 +1,6 @@
 //traer el modelo
 const { consulta } = require("../utils/consulta");
-
+//const {} = require('../public/uploads')
 /**
  * Controlador de ruta asíncrono que obtiene una lista de películas desde la API
  * y renderiza la vista del panel de administración con dicha lista.
@@ -18,6 +18,7 @@ const getPelis = async (req, res) => {
 
   res.render("admin/cPanel", {
     respuesta,
+    //imagePath: process.env.URL_BASE
   });
 };
 
@@ -57,13 +58,16 @@ const postCrearPelis = async (req, res) => {
   //const file =req.file;
   console.log("body crearPelis", body);
   //console.log("file crearPelis", file);
-  if (req.file) {
-    body.image = req.file.path; // Añade la ruta de la imagen al cuerpo de la solicitud
-  }
-
+  // if (req.file) {
+  //   body.image = req.file.path; // Añade la ruta de la imagen al cuerpo de la solicitud
+  // }
+const imagen = req.body.imagen
+const file = req.body.file
+console.log("req.body.imagen",imagen)
+console.log("req.body.file",file)
   const respuesta = await consulta(url, "POST", body);
   console.log("respuesta postCrear", respuesta);
-
+  
   res.render("admin/formCrear", {
     respuesta,
   });

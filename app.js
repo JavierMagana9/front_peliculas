@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors')
-const multer  = require('multer')
+
 require('dotenv').config();
 const cookieParser = require('cookie-parser')
 
