@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const {upload} = require('../middlewares/multerMiddle')
 const {getPelis,getCrearPelis,postCrearPelis, getModificarPeli,vistaEliminar, modificarPeli, eliminarDefinitivo} = require('../controllers/adminControllers')
 
 /**
@@ -28,7 +28,7 @@ router.get('/crear', getCrearPelis)
  * @name postCrearPelis
  * @path {POST} /crear
  */
-router.post('/crear', postCrearPelis)
+router.post('/crear', upload.single('imagen'),postCrearPelis)
 
 /**
  * Ruta GET para mostrar el formulario de modificación de una película específica.
@@ -66,5 +66,8 @@ router.get('/eliminar/:id',vistaEliminar)
  * @path {POST} /eliminardef/:id
  */
 router.post('/eliminardef/:id', eliminarDefinitivo)
+
+
+
 
 module.exports = router

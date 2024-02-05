@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors')
+const multer  = require('multer')
 require('dotenv').config();
 const cookieParser = require('cookie-parser')
 
 const port = process.env.PORT 
 
 const app = express();
+
 /**
  * Middleware para utilizar los body
  */

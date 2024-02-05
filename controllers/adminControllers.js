@@ -53,9 +53,13 @@ const getCrearPelis = (req, res) => {
 const postCrearPelis = async (req, res) => {
   const url = `${process.env.URL_BASE}/createMovie`;
   const body = req.body;
+  
   //const file =req.file;
   console.log("body crearPelis", body);
   //console.log("file crearPelis", file);
+  if (req.file) {
+    body.image = req.file.path; // Añade la ruta de la imagen al cuerpo de la solicitud
+  }
 
   const respuesta = await consulta(url, "POST", body);
   console.log("respuesta postCrear", respuesta);

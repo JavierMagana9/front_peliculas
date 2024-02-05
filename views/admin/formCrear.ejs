@@ -2,7 +2,7 @@
 
 <main class="container">
   <h1>Crear una pelicula</h1>
-  <form action="/admin/crear" method="post" class="formulario" >
+  <form action="/admin/crear" method="post" class="formulario" enctype="multipart/form-data">
     <label for="titulo">Título</label>
     <input type="text" id="titulo" name="titulo"  />
   
@@ -19,7 +19,7 @@
     <input type="text" name="duracion" id="duracion" />
   
     <label for="imagen">Imagen</label>
-    <input type="text" name="imagen" id="imagen" />
+    <input type="file" name="imagen" id="imagen" />
 
     <% if (respuesta) { %>
       <% if (respuesta.error) { %>
