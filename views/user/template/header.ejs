@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=+, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+
+  </head>
+  <body>
+    <nav class="header">
+      <form action="/user" method="get">
+        <input type="submit" id="home" value="Home" />
+      </form>
+      <p>menu</p>
+      <ul>
+        <a href="/user/search" class="btn botones">Buscar Pelicula</a>
+        <a href="/user/movies" class="btn botones">Mis Favoritos</a>
+      </ul>
+       <form action="/logout" method="post">
+            <input type="submit" name="logout" id="logout" value="Logout" class="">
+        </form>
+    </nav>
+  

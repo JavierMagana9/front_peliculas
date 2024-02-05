@@ -1,21 +1,32 @@
 <%- include('template/header') %>
+<main class="container">
+  <form action="/admin/modificar/<% if (!id) { %>
+   <%= id %>
+  <% } %>" method="POST" class="formulario">
+    <input type="text" id="id" name="id" value="<%=id_pelicula%>" />
 
-<form action="" method="post">
-    <label for="">Título</label>
-    <input type="text" id="titulo" name="titulo" />
+    <label for="titulo">Título</label>
+    <input type="text" id="titulo" name="titulo" value="<%=titulo%>" />
 
-    <label for="">Director</label>
-    <input type="text" name="director" id="director" />
+    <label for="anio">Año</label>
+    <input type="text" name="anio" id="anio" value="<%=anio%>" />
 
-    <label for="">Género</label>
-    <input type="text" name="genero" id="genero" />
+    <label for="director">Director</label>
+    <input type="text" name="director" id="director" value="<%=director%>" />
 
-    <label for="">Duración</label>
-    <input type="text" name="duracion" id="duracion" />
+    <label for="genero">Género</label>
+    <input type="text" name="genero" id="genero" value="<%=genero%>" />
 
-    <label for="">Imagen</label>
+    <label for="duracion">Duración</label>
+    <input type="text" name="duracion" id="duracion" value="<%=duracion%>" />
 
-    <input type="submit" name="botonModificar" id="botonModificar" value="Modificar">
+    <label for="imagen">Imagen</label>
+    <input type="text" name="imagen" id="imagen" value="<%=imagen%>" />
+
+    
+    
+    <button type="submit">Modificar</button>
   </form>
+</main>
 
 <%- include('template/footer') %>

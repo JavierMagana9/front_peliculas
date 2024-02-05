@@ -1,0 +1,16 @@
+<%- include('template/header') %>
+
+<main class="container">
+  <h1 class="title">HOME</h1>
+    <div class="flex-container">
+  <form action="/user/search" method="get">
+    <input type="submit" id="buscarPelis" value="Buscar Pelis" class="btn botones"/>
+  </form>
+
+  <form action="/user/movies" method="get">
+    <input type="submit" id="misPelis" value="Mis Pelis" class="btn botones"/>
+  </form>
+</div>
+</main>
+
+<%- include('template/footer') %>
