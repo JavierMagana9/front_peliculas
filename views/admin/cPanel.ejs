@@ -1,20 +1,20 @@
 <%- include('template/header') %>
 <main class="container">
-  <header class="header-main">
-    <h1>C-ADMIN</h1>
+  <header class="header-main title">
+    <h1>HOME</h1>
     <h2>Mis Peliculas</h2>
   </header>
   <section>
-    <a href="/admin/crear" class="btn">Crear Pelicula</a>
+    <a href="/admin/crear" class="btn botones">Crear Pelicula</a>
 
     <div class="flex-container">
       <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
 
-      <article>
+      <article class="box-arrangement">
         <div>
           <img src="" alt="foto pelicula" />
         </div>
-        <div>
+        <div >
           <h3><%= element.titulo %></h3>
           <p><%= element.director %></p>
         </div>

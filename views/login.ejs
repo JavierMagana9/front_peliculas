@@ -1,11 +1,11 @@
 <%- include('template/header') %>
 
-<section class="mb-5 row">
-    <section class="col-md-6">
-        <h2 class="mb-4 text-center">Login</h2>
-        <form action="/" method="POST" name="login" id="login">
-            <input type="text" id="email" name="email" placeholder="Email" class="form-control mb-2">
-            <input type="text" id="password" name="password" placeholder="Password" class="form-control mb-2">
+<main class="container">
+    <section class="">
+        <h2 class="title">Login</h2>
+        <form action="/" method="POST" name="login" id="login" class="formulario">
+            <input type="text" id="email" name="email" placeholder="Email" class="">
+            <input type="text" id="password" name="password" placeholder="Password" class="">
             <% if (errorMessage) { %>
                             
                 <ul>
@@ -14,14 +14,14 @@
                 </ul>
                
            <% } %>
-            <input type="submit" value="Login" class="form-control btn btn-dark">
+            <input type="submit" value="Login" class="">
         </form>
     </section>
     <p>¿Aun no estas registrado?</p>
     <p>Registrate aca abajo</p>
     <div>
         <form action="/registro" method="">
-            <input type="submit" value="Registrate" class="form-control btn btn-dark">
+            <input type="submit" value="Registrate" class="">
         </form>
     </div>
     <p>¿Olvidaste tu contraseña?</p>
@@ -30,6 +30,6 @@
             <input type="submit" value="recuperarContraseña" class="form-control btn btn-dark">
         </form>
     </div>
-
+</main>
 <%- include('template/footer') %>
     
