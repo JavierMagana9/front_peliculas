@@ -3,7 +3,11 @@
 <main class="container">
   <div class="flex-container box">
     <h1>¿Seguro que desas eliminar esta película?</h1>
-    <a href="/admin/elminardef/<%=id%>" class="btn botones">SI, eliminar</a>
+    <form action="/admin/eliminar/<%=id%>" method="post">
+        <input type="submit" value="SI" class="btn botones">
+  </form>
+
+
     <a href="/admin" class="btn botones">NO</a>
   </div>
 </main>
