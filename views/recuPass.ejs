@@ -1,22 +1,28 @@
 <%- include('template/header') %>
-<section>
-    <h2 class="mb-4 text-center">Recuperar Contraseña</h2>
-    <form action="/recuperarPass" method="post" name="recuPass" id="recuPass">
+<main class="container">
+   
+  <h2 class="title">Recuperar Contraseña</h2>
+  <form action="/recuperarPass" method="post" name="recuPass" id="recuPass" class="formulario">
     <p>Por favor introduzca el email con el cual creo su cuenta:</p>
-        <input type="text" id="email" name="email" placeholder="Email" class="form-control mb-2">
-      
-     
-                <input type="submit" value="Recuperar" class="form-control btn btn-dark">
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="Email"
+      class="form-control mb-2"
+    />
 
-                <% if (error) { %>
+    <input type="submit" value="Recuperar" class="btn botones" />
 
-                    <ul>
-                        <li>
-                            <%= error %>
-                        </li>
-                    </ul>
-    
-                    <% } %>
-</section>
+    <% if (error) { %>
+
+    <ul>
+      <li><%= error %></li>
+    </ul>
+
+    <% } %>
+  </form>
+
+</main>
 
 <%- include('template/footer') %>

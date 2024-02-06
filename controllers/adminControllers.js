@@ -136,7 +136,7 @@ const eliminarDefinitivo = async (req, res) => {
 try {
   const id = req.params.id;
   
-  console.log("recogido del params", id);
+  console.log("recogido del params en post", id);
   const url = `${process.env.URL_BASE}/removeMovie/${id}`;
   console.log("dentro de params el url",url)
   let respuesta = await fetch(url, {method:'DELETE'});

@@ -1,14 +1,15 @@
 <%- include('template/header') %>
 
 <main class="container">
-  <div class="flex-container box">
-    <h1>¿Seguro que desas eliminar esta película?</h1>
-    <form action="/admin/eliminar/<%=id%>" method="post">
-        <input type="submit" value="SI" class="btn botones">
-  </form>
+  <div class="box">
+    <h1 class="title">¿Seguro que desas eliminar esta película?</h1>
+    <div class="sino">
+      <form action="/admin/eliminar/<%=id%>" method="post" class="">
+        <input type="submit" value="SI" class="btn botones" />
+      </form>
 
-
-    <a href="/admin" class="btn botones">NO</a>
+      <a href="/admin" class="btn botones">NO</a>
+    </div>
   </div>
 </main>
 
