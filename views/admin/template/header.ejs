@@ -11,10 +11,24 @@
   </head>
   <body class="main2">
     <header class="header">
-      <a href="/admin" class="btn botones">Home</a>
-      <p>menu</p>
-      <form action="/logout" method="post">
-        <input type="submit" value="Logout" class="btn botones">
-    </form>
+
+      <nav id="menu-desplegable" class="navVisible">
+        <div>
+          <ul>
+            <li>
+              <a href="/admin">Home</a>
+            </li>
+            <li>
+              <a href="/logout" >Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <button class="burgerMenu" id="burgerMenu">
+        <div class="div-hamburguesa">
+          <img src="/assets/ham.png" alt="Menú" id="imgBurger" />
+        </div>
+      </button>
     </header>
   
