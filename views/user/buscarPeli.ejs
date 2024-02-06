@@ -1,0 +1,34 @@
+<%- include('template/header') %>
+<main class="container">
+  <header class="header-main">
+    <h1 class="title">BUSCAR PELICULAS</h1>
+  </header>
+
+  <section>
+    <form action="/user/search" method="post" class="formulario">
+      <input type="text" id="titulo" name="titulo" />
+      <input type="submit" value="Busqueda por Titulo" id="peli Titulo" class="btn botones"/>
+    </form>
+    <div class="flex-container">
+      <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
+
+      <article class="box-arrangement">
+        <div>
+          <img src="" alt="foto pelicula" />
+        </div>
+        <div>
+          <h3><%= element.titulo %></h3>
+          <p><%= element.director %></p>
+        </div>
+        <div class="botones flex-container">
+          <a href="/user/search/<%= element.id_pelicula %>" class="btn"
+            >Ver Mas</a
+          >
+        </div>
+      </article>
+
+      <% }) %> <% } %>
+    </div>
+  </section>
+</main>
+<%- include('template/footer') %>

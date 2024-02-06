@@ -1,0 +1,40 @@
+<%- include('template/header') %>
+<main class="container">
+  <form action="/admin/modificar/<% if (!id && data.length > 0) { %>
+   <%= id %>
+  <% } %>" method="POST" class="formulario">
+    <input type="text" hidden id="id" name="id" value="<%=data.id_pelicula%>" />
+
+    <label for="titulo">Título</label>
+    <input type="text" id="titulo" name="titulo" value="<%=data.titulo%>" />
+
+    <label for="anio">Año</label>
+    <input type="text" name="anio" id="anio" value="<%=data.anio%>" />
+
+    <label for="director">Director</label>
+    <input type="text" name="director" id="director" value="<%=data.director%>" />
+
+    <label for="genero">Género</label>
+    <input type="text" name="genero" id="genero" value="<%=data.genero%>" />
+
+    <label for="duracion">Duración</label>
+    <input type="text" name="duracion" id="duracion" value="<%=data.duracion%>" />
+
+    <label for="imagen">Imagen</label>
+    <input type="text" name="imagen" id="imagen" value="<%=data.imagen%>" />
+
+    <% if (respuesta) { %>
+      <% if (respuesta.error) { %>
+        <ul>
+         <% respuesta.msg.forEach(element => { %>
+          <li><%= element %></li>
+         <% }) %>
+        </ul>
+       <% } %>
+    <% } %>
+    
+    <button type="submit" class="btn botones">Modificar</button>
+  </form>
+</main>
+
+<%- include('template/footer') %>

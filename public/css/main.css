@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde-claro: rgb(247, 255, 221);;
+    --verde-oscuro: rgb(170, 204, 163);
+    --amarillo-claro: rgb(252, 253, 175);
+    --amarillo-oscuro: rgb(239, 215, 128); 
+    --naranja: rgb(219, 161, 89);
+    --azul: rgb(130, 163, 227);
+  }
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+.container{
+    width: 95%;
+    margin: 0 auto;
+}
+.burgerMenu {  
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+    background: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#div-hamburguesa {
+    width: 100%; 
+}
+div img {
+    width: 100%;  
+}
+#imgBurger {
+    width: 50px;
+    cursor: pointer;
+    position:sticky;   
+}
+#menu-desplegable {
+    position: absolute;
+    height: 100vh;
+    padding: 93px 25px 0 25px;
+    top: 0;
+    right: 0 ;
+    background-color: var(--verde-oscuro);
+
+}
+
+.navVisible {
+    opacity: 0;
+    visibility:visible;
+    border: 1px solid black;
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
+    background-color: var(--verde-oscuro);
+    position: absolute;
+}
+
+nav ul {
+    
+    list-style-type: none;
+}
+
+nav ul li {
+    margin-bottom: 15px;
+}
+
+html, body {
+    min-height:100%;
+}
+.main1 {
+    background: linear-gradient(var(--amarillo-claro), var(--naranja));
+}
+.main2 {
+    background: linear-gradient(var(--amarillo-claro), var(--amarillo-oscuro));
+}
+.header {
+    position: relative;
+    padding: 10px;
+    background-color: var(--azul);
+    color: var(--verde-claro);
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.btn{
+    border: 1px solid var(--azul);
+    color: var(--azul);
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    margin: 5px;
+    background-color: var(--verde-claro);
+}
+
+#btnCrear {
+    display: flex;
+    justify-content: center;
+}
+
+.header-main{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    color: var(--azul)
+}
+p, a, h1, h2, h3, label, input, li, button{
+    font-family: Rubik;
+}
+p, a, input, button, input, label{
+    font-size: 0.9rem;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;    
+    gap: 20px;
+    justify-content: center;
+}
+
+.sino {
+    display: flex;   
+    justify-content: space-around;
+}
+
+.box {
+    border: 2px solid var(--azul);;
+    margin: 30px;
+    padding: 20px;
+    background-color: var(--verde-claro);
+    text-align: center;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.box-arrangement {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.flex-container article {
+    border: 1px solid var(--azul);
+    width: 100%; 
+    padding: 40px;
+    background-color: var(--verde-oscuro);
+}
+
+input{
+    padding: 5px 0;
+    margin: 5px 0;
+}
+
+.formulario {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+ }
+ .botones{
+    margin-top: 10px;
+ }
+ .botones a{
+    display: inline-block;
+    width: calc(50% - 20%);
+ }
+
+ @media screen and (min-width: 768px){
+    .container{
+        width: 95%;
+    }
+    .flex-container article {
+        width: calc(50% - 20px); 
+        padding: 40px;
+    }
+    
+    .botones a{
+        margin-top: 10px;
+        width: 100%;
+     }
+     .botones.flex-container{
+        gap:0;
+     }
+     p, a, input, button, input, label {
+        font-size: 1rem;
+    }
+    .title {
+        font-size: 2rem;
+        padding: 20px;
+    }
+ }
+
+ @media screen and (min-width: 992px){
+    .container{
+        width: 80%;
+    }
+    .flex-container article {
+        width: calc(33% - 20px); 
+        padding: 40px;
+    }
+   
+    .botones{
+        margin-top: 5px;
+     }
+     p, a, input, button, input, label {
+        font-size: 1.2rem;
+    }
+    .title {
+        font-size: 2.4rem;
+        padding: 20px;
+    }
+ }
+
+ @media screen and (min-width: 992px){
+    .container{
+       max-width: 1200px;
+    }
+ }

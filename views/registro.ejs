@@ -1,0 +1,56 @@
+<%- include('template/header') %>
+
+<main class="container">
+  <h2 class="title">Registro</h2>
+  <form
+    action="/registro"
+    method="post"
+    name="register"
+    id="register"
+    class="formulario"
+  >
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="Username"
+      class=""
+    />
+    <input type="text" id="email" name="email" placeholder="Email" class="" />
+    <input
+      type="text"
+      id="password"
+      name="password"
+      placeholder="Password"
+      class=""
+    />
+    <input
+      type="text"
+      id="password2"
+      name="password2"
+      placeholder="Repetir password"
+      class=""
+    />
+    <% if (error) { %>
+
+    <ul>
+      <li><%= error %></li>
+    </ul>
+
+    <% } %>
+
+    <input type="submit" value="Registrar" class="btn botones" />
+  </form>
+
+  <form action="/authGoogle" method="POST" class="flex-container">
+    <input
+      type="submit"
+      name="google"
+      id="google"
+      value="Auth Google"
+      class="btn botones"
+    />
+  </form>
+</main>
+
+<%- include('template/footer') %>
