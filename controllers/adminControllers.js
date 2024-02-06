@@ -89,8 +89,8 @@ const getModificarPeli = async (req, res) => {
   console.log("get modificar", respuesta);
 
   res.render("admin/formModificar", {
-    error: respuesta.error,
-    ...respuesta.respuesta[0],
+    respuesta,
+    data: respuesta.respuesta[0],
     id: null,
   });
 };
@@ -110,17 +110,20 @@ const modificarPeli = async (req, res) => {
   console.log("ID param despues de respuesta", idParam);
   console.log("ID despues de respuesta", id);
   if (respuesta.error) {
-    // return res.render('admin/formModificar',{
-    //   error:respuesta.error,
-    // ...respuesta.respuesta[0]
-    // })
+      res.render('admin/formModificar',{
+      respuesta,
+      id: id,
+      data: []
+    })
     // console.log("respuesta modificarPelis",respuesta)
     //  return res.render('/admin/formModificar', {
     //   respuesta,
     //   id
     // })
+  } else {
+    //res.redirect("/admin");
   }
-  res.redirect("/admin");
+  
 };
 
 //GET ELIMINAR
@@ -136,12 +139,13 @@ const eliminarDefinitivo = async (req, res) => {
 try {
   const id = req.params.id;
   
-  console.log("recogido del params", id);
+  console.log("recogido del params en post", id);
   const url = `${process.env.URL_BASE}/removeMovie/${id}`;
   console.log("dentro de params el url",url)
-  let respuesta = await fetch(url, {method:'DELETE'});
-  respuesta = await respuesta.json()
-  res.redirect("/admin");
+  let respuesta = await consulta(url, "DELETE")
+  // let respuesta = await fetch(url, {method:'DELETE'});
+  // respuesta = await respuesta.json()
+   res.redirect("/admin");
   // console.log("dentro de params el url",url)
   // console.log(respuesta)
 

@@ -5,14 +5,14 @@
   </header>
 
   <section>
-    <form action="/user/search" method="post">
+    <form action="/user/search" method="post" class="formulario">
       <input type="text" id="titulo" name="titulo" />
-      <input type="submit" value="Busqueda por Titulo" id="peli Titulo" />
+      <input type="submit" value="Busqueda por Titulo" id="peli Titulo" class="btn botones"/>
     </form>
     <div class="flex-container">
       <% if (!respuesta.error) { %> <% respuesta.data.forEach(element => { %>
 
-      <article>
+      <article class="box-arrangement">
         <div>
           <img src="" alt="foto pelicula" />
         </div>
