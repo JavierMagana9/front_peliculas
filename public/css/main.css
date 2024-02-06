@@ -23,30 +23,56 @@ a{
     width: 95%;
     margin: 0 auto;
 }
-#menuBurger {
+.burgerMenu {  
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+    background: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#div-hamburguesa {
+    width: 100%; 
+}
+div img {
+    width: 100%;  
+}
+#imgBurger {
     width: 50px;
-    cursor: pointer;   
+    cursor: pointer;
+    position:sticky;   
 }
 #menu-desplegable {
-    opacity: 0;
-}
-.navVisible {
-    opacity: 1;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+    position: absolute;
+    height: 100vh;
+    padding: 93px 25px 0 25px;
+    top: 0;
+    right: 0 ;
     background-color: var(--verde-oscuro);
-    top: 80px;
+
+}
+
+.navVisible {
+    opacity: 0;
+    visibility:visible;
+    border: 1px solid black;
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
+    background-color: var(--verde-oscuro);
     position: absolute;
 }
+
 nav ul {
-    display: flex;
+    
     list-style-type: none;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
+}
+
+nav ul li {
+    margin-bottom: 15px;
 }
 
 html, body {
@@ -59,11 +85,12 @@ html, body {
     background: linear-gradient(var(--amarillo-claro), var(--amarillo-oscuro));
 }
 .header {
+    position: relative;
     padding: 10px;
     background-color: var(--azul);
     color: var(--verde-claro);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 .btn{
@@ -164,9 +191,7 @@ input{
         width: calc(50% - 20px); 
         padding: 40px;
     }
-    #menu-desplegable {
-        opacity: 1;
-    }
+    
     .botones a{
         margin-top: 10px;
         width: 100%;
@@ -191,9 +216,7 @@ input{
         width: calc(33% - 20px); 
         padding: 40px;
     }
-    #menu-desplegable {
-        opacity: 1;
-    }
+   
     .botones{
         margin-top: 5px;
      }

@@ -24,8 +24,8 @@
     <% if (respuesta) { %>
       <% if (respuesta.error) { %>
         <ul>
-         <% respuesta.errors.forEach(element => { %>
-          <li><%= element.msg %></li>
+         <% respuesta.msg.forEach(element => { %>
+          <li><%= element %></li>
          <% }) %>
         </ul>
        <% } %>
