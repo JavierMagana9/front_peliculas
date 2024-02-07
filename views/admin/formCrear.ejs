@@ -1,7 +1,7 @@
 <%- include('template/header') %>
 
 <main class="container">
-  <h1>Crear una pelicula</h1>
+  <h1 class="title">Crear una pelicula</h1>
   <form action="/admin/crear" method="post" class="formulario" >
     <label for="titulo">Título</label>
     <input type="text" id="titulo" name="titulo"  />
@@ -24,14 +24,14 @@
     <% if (respuesta) { %>
       <% if (respuesta.error) { %>
         <ul>
-         <% respuesta.errors.forEach(element => { %>
-          <li><%= element.msg %></li>
+         <% respuesta.msg.forEach(element => { %>
+          <li><%= element %></li>
          <% }) %>
         </ul>
        <% } %>
     <% } %>
    
-   <input type="submit" value="Crear" id="crear">
+   <input type="submit" value="Crear" id="crear" class="btn botones">
   </form>
 </main>
 <%- include('template/footer') %>

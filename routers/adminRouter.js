@@ -67,6 +67,8 @@ router.get('/eliminar/:id',validacionCookie,vistaEliminar)
  * @name eliminarDefinitivo
  * @path {POST} /eliminar/:id
  */
-router.post('/eliminar/:id',validacionCookie, eliminarDefinitivo)
+
+router.get('/eliminardef/:id',validacionCookie, eliminarDefinitivo)
+
 
 module.exports = router
