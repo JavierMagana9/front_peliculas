@@ -1,34 +1,7 @@
-const { JWTGenerator } = require('../utils/jws')
-const firebase = require('firebase');
-var firebaseConfig = {
-    apiKey: process.env.APIKEY,
-    authDomain: process.env.AUTHDOMAIN,
-    projectId: process.env.PROJECTID,
-    storageBucket: process.env.STORAGEBUCKET,
-    messagingSenderId: process.env.MESSAGING,
-    appId: process.env.APPID
-};
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-// const firebaseAuth=firebase.getAuth(firebaseApp)
-// const firebaseDB=firebase.getFirestore(firebaseApp)
-
-
-// ,{serviceAccountId: 'jorge-994@rosy-fiber-413408.iam.gserviceaccount.com'},
-
-
-const db = firebase.firestore();
-const User = db.collection("Usuarios");
-
-//  let firebaseAuth=firebase.auth.getAuth()
-
-// firebase.initializeApp({
-//     serviceAccountId: 'jorge-994@rosy-fiber-413408.iam.gserviceaccount.com',
-// })
-
-
-
+const firebase = require('firebase')
+const { User } = require('../config/firebaseConfig')
+const cookieParser = require('cookie-parser')
 const getLogin = (req, res) => {
     res.render('login', { errorMessage: null })
 }
@@ -44,8 +17,8 @@ const getRegistro = (req, res) => {
 const registrarUsuario = async (req, res) => {
 
     try {
-        const rol = "user"
-        const favoritos = ["id1", "id2", "id3"]
+        const rol = "u"
+        const favoritos = []
         const { email, username, password, password2 } = req.body;
 
         if (password != password2) {
@@ -54,31 +27,18 @@ const registrarUsuario = async (req, res) => {
                 error: "Las contraseñas son diferentes"
             })
         }
-        // const data = req.body;
-        // await User.add({ data });
-        // res.send({ msg: "Usuario aniadido" });
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
+
             .then(async (userCredential) => {
                 // Signed in
-                var user = userCredential.user;
+                let user = userCredential.user;
                 const uid = user.uid
                 // console.log("iddd", user.uid)
-                console.log("Esta registrando", user);
+                //console.log("Esta registrando", user);
                 // const data = req.body;
                 await User.add({ email, username, password, uid, rol, favoritos });
-                // await User.update({idobtenidodelacoockie,pelicula });
 
-                // firebase.getAuth()
-                //     .createCustomToken(uid)
-                //     .then((customToken) => {
-
-                //         console.log("creacion de token", customToken)
-                //         // Send token back to client
-                //     })
-                //     .catch((error) => {
-                //         console.log('Error creating custom token:', error);
-                //     });
 
                 res.redirect('/');
 
@@ -93,8 +53,6 @@ const registrarUsuario = async (req, res) => {
                 console.log("Mensaje error===>", errorMessage, errorCode);
             });
 
-
-
     } catch (e) {
         console.log(e)
         //res.redirect('registrar');
@@ -103,49 +61,72 @@ const registrarUsuario = async (req, res) => {
 }
 
 
-
-
-
 const loguearUsuario = async (req, res) => {
     try {
 
-
         const { email, password } = req.body;
 
-        console.log("email", email);
-        console.log("pass", password);
+        // console.log("email", email);
+        // console.log("pass", password);
+        // const userCredential=await firebase.auth().signInWithEmailAndPassword(email, password)
+        // console.log("usercredet", userCredential)
+
+        // const {user}=userCredential
+
 
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(async (userCredential) => {
-                // Signed in
+
                 let user = userCredential.user;
-                //console.log("user", user);
-                //     console.log("token", user.refreshToken)
+
                 const uid = user.uid
-                console.log("buscando uid ", uid)
+                const tokenAuth = user.Aa
 
-                const token = await JWTGenerator(uid)
+                let coleccion = await User.get();
+                const list = coleccion.docs.map((doc) => (doc.data()));
 
-                console.log("este es el token con jwt", token)
-                res.cookie('x-Token', token, {
-                    maxAge: 36000,
+                // const uidFirestore = coleccion.doc('uid')
+
+                // console.log("el uid del firestore ", uidFirestore)
+
+                const resultado = list.find((items) => items.uid === uid);
+                //console.log("Obteniendo valores del usuario: ",resultado);
+                const rol = resultado.rol
+                console.log("Obteniendo rol del usuario : ", resultado.rol);
+                let body = {
+                    uid,
+                    rol
+                }
+
+                console.log("objeto dentro de cookie", body)
+
+                res.cookie('xtoken', JSON.stringify(body), {
+                    maxAge: 360000,
                     secure: true,
-
                 })
-
-                res.redirect("/user")
-                //    res.send("Accedio rol Usuario");//ESTO TIENE QUE SER UN RES.REDIRECT
-                //  let Token= firebase.auth().createCustomToken(email)
-                //     .then((customToken) => {
-
-                //         console.log("creacion de token", customToken)
-                //         // Send token back to client
-                //     })
-                //     .catch((error) => {
-                //         console.log('Error creating custom token:', error);
-                //     });
-                //     console.log("dentro de token", Token)
                 
+            //    const cookie= req.cookies.xtoken
+            //    console.log("cookie por parsear", cookie);
+            //     let cookieP = JSON.parse(cookie)
+            //     console.log("cookie parseada", cookieP)
+                
+            
+                // const { rol:rolEnCookie } = cookieP
+            
+                // console.log("ROL", rolEnCookie)
+                
+                
+                if (rol == "u") {
+                    console.log("entra por el user=")
+                    res.redirect("/user")
+                } else if (rol == "a") {
+                    console.log("entra por el admin==")
+                    res.redirect("/admin")
+                } else {
+                    console.log("rechazado=====")
+                    res.redirect("/")
+                }
+
             })
             .catch((error) => {
                 console.log("error en login", error)
@@ -164,10 +145,11 @@ const loguearUsuario = async (req, res) => {
 
 
 const logoutUsuario = (req, res) => {
-    const body = res
-    console.log("esta es la respuesta del logout", body)
+    
+    
     firebase.auth().signOut().then(() => {
         console.log("=========el usuario cerro sesion")
+        res.clearCookie('xtoken')
         res.redirect("/")
     })
         .catch((error) => {
@@ -186,7 +168,7 @@ const authGoogle = (req, res) => {
     firebase.auth().signInWithPopup(provider).then((respuesta) => {
         console.log("se proceso con google", respuesta)
     }).catch((error) => {
-        console.log("Hubo un erro en la Auth con google", error)
+        console.log("Hubo un error en la Auth con google", error)
     })
 
 
@@ -226,11 +208,19 @@ const postRecuperarPass = (req, res) => {
 
 }
 
+const firestoreFavoritos = async (req, res) => {
+    const snapshot = await User.get();
+    const list = snapshot.docs.map((doc) => (doc.data()));
+    res.send(list);
+    console.log("dentro", snapshot)
+}
+
 
 
 module.exports = {
     registrarUsuario,
-    getLogin, getRegistro, loguearUsuario, logoutUsuario, authGoogle, getRecuperarPass, postRecuperarPass
+    getLogin, getRegistro, loguearUsuario, logoutUsuario, authGoogle, getRecuperarPass, postRecuperarPass,
+    User
 }
 
 

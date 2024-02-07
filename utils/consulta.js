@@ -35,7 +35,7 @@ const consulta = async (url, method = "GET", body = {}) => {
     if (method == "delete") {
       console.log("entra en delete")
       opciones = {
-        method: method,
+        method: method
       };
     }
 

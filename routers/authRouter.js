@@ -3,6 +3,9 @@ const router = express.Router()
 
 const {registrarUsuario, getLogin,getRegistro, loguearUsuario,logoutUsuario,authGoogle,getRecuperarPass,postRecuperarPass}=require('../controllers/authControllers')
 
+
+
+
 //Vista del login 
 router.get("/",getLogin)
 //envia email y password para comprobar 
