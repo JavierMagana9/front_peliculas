@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors')
 require('dotenv').config();
 const cookieParser = require('cookie-parser')
+const multer  = require('multer')
 
 const port = process.env.PORT 
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(express.json())
+
 
 /**
  * Middleware para servir archivos estáticos desde el directorio 'public'.
