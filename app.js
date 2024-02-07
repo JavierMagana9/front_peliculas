@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(express.json())
 
+
 /**
  * Middleware para servir archivos estáticos desde el directorio 'public'.
  */
@@ -25,13 +26,15 @@ app.use(express.static(__dirname + "/public"))
  */
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
+
+app.use(cookieParser())
 /**
  * Middleware para habilitar CORS (Intercambio de Recursos de Origen Cruzado).
  */
 app.use(cors())
 
 
-app.use(cookieParser())
+
 
 /**
  * Rutas para las secciones 'admin' y 'user' de la aplicación.

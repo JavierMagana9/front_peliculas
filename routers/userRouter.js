@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const {validacionCookie}=require('../middleware/validCookie')
 
 const {getIndexUser,getPeliculas,getFavoritos,postPeliTitulo,verMasId} = require('../controllers/userControllers')
-const {jwtValidar} =require('../middleware/jwtValidar')
+// const{validacionCookie}=require('../middleware/validCookie')
 /**
  * Ruta GET para la página principal del área de usuario.
  * Muestra opciones como buscar películas y ver películas favoritas.
@@ -10,7 +11,7 @@ const {jwtValidar} =require('../middleware/jwtValidar')
  * @name getIndexUser
  * @path {GET} /
  */
-router.get('/', getIndexUser)
+router.get('/',validacionCookie ,getIndexUser)
 //en esta vista habran 2 botones los cuales tendran buscar peliculas y ver mi peliculas favoritas 
 
 /**
@@ -20,7 +21,7 @@ router.get('/', getIndexUser)
  * @name getPeliculas
  * @path {GET} /search
  */
-router.get('/search', getPeliculas)
+router.get('/search',validacionCookie, getPeliculas)
 /**
  * Ruta GET para ver más detalles de una película específica.
  * El ID de la película se pasa como parámetro en la ruta.
@@ -28,7 +29,7 @@ router.get('/search', getPeliculas)
  * @name verMasId
  * @path {GET} /search/:id
  */
-router.get('/search/:id', verMasId)
+router.get('/search/:id',validacionCookie, verMasId)
 
 /**
  * Ruta POST para buscar películas por título.
@@ -37,7 +38,7 @@ router.get('/search/:id', verMasId)
  * @name postPeliTitulo
  * @path {POST} /search
  */
-router.post('/search', postPeliTitulo)
+router.post('/search',validacionCookie, postPeliTitulo)
 
 // //dentro de buscar peliculas (ya se visualizaran todas las peliculas)habra un input text con la opcion de poder buscar la pelicula por titulo, y cuando de click en buscar peliculas te muestre dicha pelicula cada pelicula tendra un boton de ver mas y otro de añadir favoritos 
 
@@ -49,7 +50,7 @@ router.post('/search', postPeliTitulo)
  * @name getFavoritos
  * @path {GET} /movies
  */
-router.get('/movies', getFavoritos)
+router.get('/movies',validacionCookie, getFavoritos)
 
 
 // //menu hamburguesa va a tener // inicio // buscador // mis peliculas 

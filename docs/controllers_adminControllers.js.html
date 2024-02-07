@@ -1,4 +1,32 @@
-//traer el modelo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/adminControllers.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/adminControllers.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//traer el modelo
 const { consulta } = require("../utils/consulta");
 
 /**
@@ -9,7 +37,7 @@ const { consulta } = require("../utils/consulta");
  * @function getPelis
  * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP.
  * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
- * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ * @returns {Promise&lt;void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
  */
 const getPelis = async (req, res) => {
   let respuesta = await consulta(`${process.env.URL_BASE}/search`);
@@ -47,7 +75,7 @@ const getCrearPelis = (req, res) => {
  * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP,
  * incluyendo los datos del formulario en req.body.
  * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
- * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ * @returns {Promise&lt;void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
  */
 
 const postCrearPelis = async (req, res) => {
@@ -78,7 +106,7 @@ const postCrearPelis = async (req, res) => {
  * @param {Request} req - El objeto de solicitud de Express, que contiene información sobre la petición HTTP,
  * incluyendo el ID de la película en req.params.id.
  * @param {Response} res - El objeto de respuesta de Express, que se utiliza para enviar la respuesta HTTP al cliente.
- * @returns {Promise<void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
+ * @returns {Promise&lt;void>} - No devuelve nada ya que la respuesta se maneja mediante el método `render`.
  */
 
 //GET MODIFICAR PELI
@@ -89,8 +117,8 @@ const getModificarPeli = async (req, res) => {
   console.log("get modificar", respuesta);
 
   res.render("admin/formModificar", {
-    respuesta,
-    data: respuesta.respuesta[0],
+    error: respuesta.error,
+    ...respuesta.respuesta[0],
     id: null,
   });
 };
@@ -110,20 +138,17 @@ const modificarPeli = async (req, res) => {
   console.log("ID param despues de respuesta", idParam);
   console.log("ID despues de respuesta", id);
   if (respuesta.error) {
-      res.render('admin/formModificar',{
-      respuesta,
-      id: id,
-      data: []
-    })
+    // return res.render('admin/formModificar',{
+    //   error:respuesta.error,
+    // ...respuesta.respuesta[0]
+    // })
     // console.log("respuesta modificarPelis",respuesta)
     //  return res.render('/admin/formModificar', {
     //   respuesta,
     //   id
     // })
-  } else {
-    //res.redirect("/admin");
   }
-  
+  res.redirect("/admin");
 };
 
 //GET ELIMINAR
@@ -139,13 +164,12 @@ const eliminarDefinitivo = async (req, res) => {
 try {
   const id = req.params.id;
   
-  console.log("recogido del params en post", id);
+  console.log("recogido del params", id);
   const url = `${process.env.URL_BASE}/removeMovie/${id}`;
   console.log("dentro de params el url",url)
-  let respuesta = await consulta(url, "DELETE")
-  // let respuesta = await fetch(url, {method:'DELETE'});
-  // respuesta = await respuesta.json()
-   res.redirect("/admin");
+  let respuesta = await fetch(url, {method:'DELETE'});
+  respuesta = await respuesta.json()
+  res.redirect("/admin");
   // console.log("dentro de params el url",url)
    console.log(respuesta)
 
@@ -165,3 +189,26 @@ module.exports = {
   modificarPeli,
   eliminarDefinitivo,
 };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#consulta">consulta</a></li><li><a href="global.html#eliminarDefinitivo">eliminarDefinitivo</a></li><li><a href="global.html#getCrearPelis">getCrearPelis</a></li><li><a href="global.html#getFavoritos">getFavoritos</a></li><li><a href="global.html#getIndexUser">getIndexUser</a></li><li><a href="global.html#getModificarPeli">getModificarPeli</a></li><li><a href="global.html#getPeliculas">getPeliculas</a></li><li><a href="global.html#getPelis">getPelis</a></li><li><a href="global.html#modificarPeli">modificarPeli</a></li><li><a href="global.html#postCrearPelis">postCrearPelis</a></li><li><a href="global.html#postPeliTitulo">postPeliTitulo</a></li><li><a href="global.html#verMasId">verMasId</a></li><li><a href="global.html#vistaEliminar">vistaEliminar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 06 2024 09:43:20 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

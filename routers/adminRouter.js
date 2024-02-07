@@ -3,6 +3,8 @@ const router = express.Router()
 
 const {getPelis,getCrearPelis,postCrearPelis, getModificarPeli,vistaEliminar, modificarPeli, eliminarDefinitivo} = require('../controllers/adminControllers')
 
+const {validacionCookie}=require('../middleware/validCookie')
+// const {firebaseAuth}=require('../middleware/firebaseAuth')
 /**
  * Ruta GET para obtener la página principal que muestra una lista de películas.
  * Utiliza el controlador 'getPelis' para recuperar las películas y renderizar la vista correspondiente.
@@ -10,7 +12,7 @@ const {getPelis,getCrearPelis,postCrearPelis, getModificarPeli,vistaEliminar, mo
  * @name getPelis
  * @path {GET} /
  */
-router.get('/', getPelis)
+router.get('/',validacionCookie, getPelis)
 
 /**
  * Ruta GET para mostrar el formulario de creación de películas.
@@ -19,7 +21,7 @@ router.get('/', getPelis)
  * @name getCrearPelis
  * @path {GET} /crear
  */
-router.get('/crear', getCrearPelis)
+router.get('/crear',validacionCookie, getCrearPelis)
 /**
  * Ruta POST para procesar el formulario de creación de películas.
  * Utiliza el controlador 'postCrearPelis' para manejar la entrada del formulario
@@ -28,7 +30,7 @@ router.get('/crear', getCrearPelis)
  * @name postCrearPelis
  * @path {POST} /crear
  */
-router.post('/crear', postCrearPelis)
+router.post('/crear',validacionCookie, postCrearPelis)
 
 /**
  * Ruta GET para mostrar el formulario de modificación de una película específica.
@@ -38,7 +40,7 @@ router.post('/crear', postCrearPelis)
  * @name getModificarPeli
  * @path {GET} /modificar/:id
  */
-router.get('/modificar/:id', getModificarPeli)
+router.get('/modificar/:id',validacionCookie, getModificarPeli)
 /**
  * Ruta POST para procesar la modificación de una película.
  * Utiliza el controlador 'modificarPeli' para manejar los datos del formulario
@@ -47,7 +49,7 @@ router.get('/modificar/:id', getModificarPeli)
  * @name modificarPeli
  * @path {POST} /modificar
  */
-router.post('/modificar', modificarPeli)
+router.post('/modificar',validacionCookie, modificarPeli)
 /**
  * Ruta GET para mostrar la vista de confirmación de eliminación de una película.
  * Utiliza el controlador 'vistaEliminar' para renderizar la vista de confirmación
@@ -56,15 +58,17 @@ router.post('/modificar', modificarPeli)
  * @name vistaEliminar
  * @path {GET} /eliminar/:id
  */
-router.get('/eliminar/:id',vistaEliminar)
+router.get('/eliminar/:id',validacionCookie,vistaEliminar)
 /**
  * Ruta POST para eliminar definitivamente una película.
  * Utiliza el controlador 'eliminarDefinitivo' para eliminar la película
  * basándose en el ID proporcionado en la ruta.
  * 
  * @name eliminarDefinitivo
- * @path {POST} /eliminardef/:id
+ * @path {POST} /eliminar/:id
  */
-router.get('/eliminardef/:id', eliminarDefinitivo)
+
+router.get('/eliminardef/:id',validacionCookie, eliminarDefinitivo)
+
 
 module.exports = router

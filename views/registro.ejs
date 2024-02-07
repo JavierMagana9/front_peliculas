@@ -1,5 +1,6 @@
 <%- include('template/header') %>
 
+
 <main class="container">
   <h2 class="title">Registro</h2>
   <form
@@ -45,6 +46,7 @@
   <form action="/authGoogle" method="POST" class="flex-container">
     <input
       type="submit"
+      hidden
       name="google"
       id="google"
       value="Auth Google"
@@ -54,3 +56,4 @@
 </main>
 
 <%- include('template/footer') %>
+
